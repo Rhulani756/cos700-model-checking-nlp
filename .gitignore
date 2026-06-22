@@ -216,3 +216,22 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# C++ build artifacts
+*.o
+*.out
+*.exe
+a.out
+
+# CBMC/ESBMC output files
+*.goto
+*.xml
+
+# Sensitive student data
+data/submissions/
+
+# Environment
+.env
+__pycache__/
+*.pyc
+.venv/
