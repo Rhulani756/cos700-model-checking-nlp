@@ -1,0 +1,81 @@
+filename,error_type,buggy_line,theme
+array_bounds_01_student_grades.cpp,Array bounds violation,20,student_grades
+array_bounds_02_temperature_log.cpp,Array bounds violation,23,temperature_log
+array_bounds_03_inventory_stock.cpp,Array bounds violation,12,inventory_stock
+array_bounds_04_bank_balance.cpp,Array bounds violation,20,bank_balance
+array_bounds_05_matrix_calc.cpp,Array bounds violation,20,matrix_calc
+array_bounds_06_quiz_scores.cpp,Array bounds violation,23,quiz_scores
+array_bounds_07_employee_payroll.cpp,Array bounds violation,12,employee_payroll
+array_bounds_08_library_books.cpp,Array bounds violation,20,library_books
+array_bounds_09_shopping_cart.cpp,Array bounds violation,20,shopping_cart
+array_bounds_10_weather_avg.cpp,Array bounds violation,23,weather_avg
+array_bounds_11_sports_scores.cpp,Array bounds violation,12,sports_scores
+array_bounds_12_recipe_scaler.cpp,Array bounds violation,20,recipe_scaler
+array_bounds_13_parking_lot.cpp,Array bounds violation,20,parking_lot
+array_bounds_14_vending_machine.cpp,Array bounds violation,23,vending_machine
+array_bounds_15_gradebook.cpp,Array bounds violation,12,gradebook
+array_bounds_16_calendar_days.cpp,Array bounds violation,20,calendar_days
+array_bounds_17_contact_list.cpp,Array bounds violation,20,contact_list
+array_bounds_18_sensor_log.cpp,Array bounds violation,23,sensor_log
+array_bounds_19_game_scores.cpp,Array bounds violation,12,game_scores
+array_bounds_20_fibonacci_calc.cpp,Array bounds violation,20,fibonacci_calc
+null_pointer_01_student_grades.cpp,Null pointer dereference,28,student_grades
+null_pointer_02_temperature_log.cpp,Null pointer dereference,30,temperature_log
+null_pointer_03_inventory_stock.cpp,Null pointer dereference,35,inventory_stock
+null_pointer_04_bank_balance.cpp,Null pointer dereference,39,bank_balance
+null_pointer_05_matrix_calc.cpp,Null pointer dereference,28,matrix_calc
+null_pointer_06_quiz_scores.cpp,Null pointer dereference,30,quiz_scores
+null_pointer_07_employee_payroll.cpp,Null pointer dereference,35,employee_payroll
+null_pointer_08_library_books.cpp,Null pointer dereference,39,library_books
+null_pointer_09_shopping_cart.cpp,Null pointer dereference,28,shopping_cart
+null_pointer_10_weather_avg.cpp,Null pointer dereference,30,weather_avg
+null_pointer_11_sports_scores.cpp,Null pointer dereference,35,sports_scores
+null_pointer_12_recipe_scaler.cpp,Null pointer dereference,39,recipe_scaler
+null_pointer_13_parking_lot.cpp,Null pointer dereference,28,parking_lot
+null_pointer_14_vending_machine.cpp,Null pointer dereference,30,vending_machine
+null_pointer_15_gradebook.cpp,Null pointer dereference,35,gradebook
+null_pointer_16_calendar_days.cpp,Null pointer dereference,39,calendar_days
+null_pointer_17_contact_list.cpp,Null pointer dereference,28,contact_list
+null_pointer_18_sensor_log.cpp,Null pointer dereference,30,sensor_log
+null_pointer_19_game_scores.cpp,Null pointer dereference,35,game_scores
+null_pointer_20_fibonacci_calc.cpp,Null pointer dereference,39,fibonacci_calc
+infinite_loop_01_student_grades.cpp,Non-terminating loop,16,student_grades
+infinite_loop_02_temperature_log.cpp,Non-terminating loop,19,temperature_log
+infinite_loop_03_inventory_stock.cpp,Non-terminating loop,21,inventory_stock
+infinite_loop_04_bank_balance.cpp,Non-terminating loop,21,bank_balance
+infinite_loop_05_matrix_calc.cpp,Non-terminating loop,16,matrix_calc
+infinite_loop_06_quiz_scores.cpp,Non-terminating loop,19,quiz_scores
+infinite_loop_07_employee_payroll.cpp,Non-terminating loop,21,employee_payroll
+infinite_loop_08_library_books.cpp,Non-terminating loop,21,library_books
+infinite_loop_09_shopping_cart.cpp,Non-terminating loop,16,shopping_cart
+infinite_loop_10_weather_avg.cpp,Non-terminating loop,19,weather_avg
+infinite_loop_11_sports_scores.cpp,Non-terminating loop,21,sports_scores
+infinite_loop_12_recipe_scaler.cpp,Non-terminating loop,21,recipe_scaler
+infinite_loop_13_parking_lot.cpp,Non-terminating loop,16,parking_lot
+infinite_loop_14_vending_machine.cpp,Non-terminating loop,19,vending_machine
+infinite_loop_15_gradebook.cpp,Non-terminating loop,21,gradebook
+infinite_loop_16_calendar_days.cpp,Non-terminating loop,21,calendar_days
+infinite_loop_17_contact_list.cpp,Non-terminating loop,16,contact_list
+infinite_loop_18_sensor_log.cpp,Non-terminating loop,19,sensor_log
+infinite_loop_19_game_scores.cpp,Non-terminating loop,21,game_scores
+infinite_loop_20_fibonacci_calc.cpp,Non-terminating loop,21,fibonacci_calc
+div_zero_01_student_grades.cpp,Division by zero,18,student_grades
+div_zero_02_temperature_log.cpp,Division by zero,17,temperature_log
+div_zero_03_inventory_stock.cpp,Division by zero,26,inventory_stock
+div_zero_04_bank_balance.cpp,Division by zero,15,bank_balance
+div_zero_05_matrix_calc.cpp,Division by zero,18,matrix_calc
+div_zero_06_quiz_scores.cpp,Division by zero,17,quiz_scores
+div_zero_07_employee_payroll.cpp,Division by zero,26,employee_payroll
+div_zero_08_library_books.cpp,Division by zero,15,library_books
+div_zero_09_shopping_cart.cpp,Division by zero,18,shopping_cart
+div_zero_10_weather_avg.cpp,Division by zero,17,weather_avg
+div_zero_11_sports_scores.cpp,Division by zero,26,sports_scores
+div_zero_12_recipe_scaler.cpp,Division by zero,15,recipe_scaler
+div_zero_13_parking_lot.cpp,Division by zero,18,parking_lot
+div_zero_14_vending_machine.cpp,Division by zero,17,vending_machine
+div_zero_15_gradebook.cpp,Division by zero,26,gradebook
+div_zero_16_calendar_days.cpp,Division by zero,15,calendar_days
+div_zero_17_contact_list.cpp,Division by zero,18,contact_list
+div_zero_18_sensor_log.cpp,Division by zero,17,sensor_log
+div_zero_19_game_scores.cpp,Division by zero,26,game_scores
+div_zero_20_fibonacci_calc.cpp,Division by zero,15,fibonacci_calc
