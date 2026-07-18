@@ -77,7 +77,10 @@ def parse(raw_output: str) -> dict:
             result["states"].append(entry)
             break
         else:
-            entry["assignment"] = line.strip()
+            assignment = line.strip()
+            if " (" in assignment:
+                assignment = assignment[:assignment.index(" (")]
+            entry["assignment"] = assignment
             result["states"].append(entry)
             entry = {}
     return result
