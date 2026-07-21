@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import feedback
+from routers import feedback, upload
 
 app = FastAPI(title="COS700 Feedback API")
 
@@ -12,6 +12,7 @@ app.add_middleware(
 )
 
 app.include_router(feedback.router, prefix="/api")
+app.include_router(upload.router, prefix="/api")
 
 @app.get("/health")
 async def health_check():

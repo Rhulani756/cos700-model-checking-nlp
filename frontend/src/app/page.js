@@ -45,8 +45,6 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [error]);
 
-
-
   const ALLOWED_EXTENSIONS = [".cpp", ".h"];
 
   const hasAllowedExtension = (filename) =>
@@ -94,21 +92,58 @@ export default function Home() {
     setPanelMode(PANEL.NONE);
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (selectedFiles.length === 0) {
       setError("Select at least one file before uploading.");
       return;
     }
-
     setUploadedFiles(selectedFiles);
     setselectedFiles([]);
     setPanelMode(PANEL.RESULTS);
     setLoading(true);
     setAssignments([]);
 
-    setTimeout(() => {
+    const formData = new FormData();
+    selectedFiles.forEach((file) => {
+      formData.append("files", file);
+      formData.append("relative_paths", file.webkitRelativePath || file.name);
+    });
+
+    try {
+      // Upload
+      const uploadRes = await fetch("http://localhost:8000/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!uploadRes.ok) {
+        const errBody = await uploadRes.json().catch(() => ({}));
+        throw new Error(errBody.detail || `Upload failed with status ${uploadRes.status}`);
+      }
+
+      const { submission_id } = await uploadRes.json();
+
+      // Feedback
+      const feedbackRes = await fetch("http://localhost:8000/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ submission_id }),
+      });
+
+      if (!feedbackRes.ok) {
+        const errBody = await feedbackRes.json().catch(() => ({}));
+        throw new Error(errBody.detail || `Feedback generation failed with status ${feedbackRes.status}`);
+      }
+
+      const feedback = await feedbackRes.json();
+
+      setAssignments([feedback]);
+    } catch (err) {
+      setError(err.message || "Upload failed. Please try again.");
+      setPanelMode(PANEL.NONE);
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
   const showRightPanel = panelMode !== PANEL.NONE;

@@ -111,7 +111,7 @@ GEMINI_API_KEY=...
 ### Run the Development Server
 
 ```bash
-uvicorn main:app --reload --port 8000
+uvicorn main:app --reload
 ```
 
 The API runs on [http://localhost:8000](http://localhost:8000).
