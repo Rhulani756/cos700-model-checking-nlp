@@ -1,0 +1,12 @@
+Focus on the expression used as the divisor and the execution path on which its value becomes zero.
+
+When the counterexample contains enough evidence, explain:
+- the division or remainder expression that fails;
+- the divisor value immediately before the operation;
+- how input, subtraction, counters, lookup results, or another calculation produces zero;
+- the branch conditions that allow execution to reach the operation;
+- whether zero represents invalid input or a valid case that needs separate behaviour.
+
+Use the reported source line and divisor value as evidence. Guide the student to define the intended zero case and to validate or constrain the divisor before evaluating the operation.
+
+Do not claim that the divisor is always zero when the counterexample demonstrates only one failing path. Do not invent an input value or expression that is absent from the supplied data. Do not suggest replacing division with an unrelated operation merely to suppress the checker failure.

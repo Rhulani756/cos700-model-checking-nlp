@@ -1,0 +1,13 @@
+Treat loop-termination findings carefully because bounded model checking explores execution only up to a configured unwind bound.
+
+When the counterexample contains enough evidence, explain:
+- the loop condition and the variables that control it;
+- the initial values of those variables;
+- how the variables change, or fail to change, on each relevant path;
+- whether each update moves execution toward making the condition false;
+- whether a branch, continue statement, reset, arithmetic wraparound, or unchanged variable prevents progress;
+- the final trace state near the unwind or termination failure.
+
+Use "may not terminate" or "the checker could not prove termination within the configured bound" unless the trace clearly establishes a repeating state or a condition that can never become false. Distinguish a genuinely non-progressing loop from an unwind bound that may simply be too small.
+
+Do not state that the loop is infinite solely because an unwinding assertion failed. Suggest checking the progress measure, updating the control variable on every relevant path, correcting the condition, or reviewing the unwind bound according to the evidence.
