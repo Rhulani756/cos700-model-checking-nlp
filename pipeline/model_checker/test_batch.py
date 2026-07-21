@@ -8,43 +8,48 @@ def run_all_tests():
     project_root = Path(__file__).resolve().parents[2]
     programs_dir = project_root / "data" / "programs"
     
-    cbmc_out_dir = project_root / "data" / "model_checker_outputs" / "cbmc"
-    esbmc_out_dir = project_root / "data" / "model_checker_outputs" / "esbmc"
+    cbmc_base_dir = project_root / "data" / "model_checker_outputs" / "cbmc"
+    esbmc_base_dir = project_root / "data" / "model_checker_outputs" / "esbmc"
 
-    # Ensure output directories exist
-    cbmc_out_dir.mkdir(parents=True, exist_ok=True)
-    esbmc_out_dir.mkdir(parents=True, exist_ok=True)
-    
-    cbmc_runner = CBMCRunner(unwind_limit=5, timeout_seconds=30)
-    esbmc_runner = ESBMCRunner(unwind_limit=5, timeout_seconds=30)
+    runner_cbmc = CBMCRunner(unwind_limit=5, timeout_seconds=30)
+    runner_esbmc = ESBMCRunner(unwind_limit=5, timeout_seconds=30)
 
-    # Find all test files recursively inside data/programs/
+    # rglob recursively searches all subdirectories (array_bounds, div_zero, etc.)
     cpp_files = list(programs_dir.rglob("*.cpp"))
-    print(f"Found {len(cpp_files)} C++ programs to verify.\n")
+    print(f"Found {len(cpp_files)} C++ programs across subfolders to verify.\n")
 
     if not cpp_files:
-        print("❌ No C++ files found in data/programs/. Please check your directory.")
+        print("❌ No C++ files found in data/programs/. Check directory structure.")
         return
 
     for cpp_file in cpp_files:
-        print(f"🔄 Verifying: {cpp_file.name}...")
+        # Preserve subfolder structure (e.g., 'array_bounds' or 'div_zero')
+        relative_folder = cpp_file.relative_to(programs_dir).parent
+        
+        cbmc_out_dir = cbmc_base_dir / relative_folder
+        esbmc_out_dir = esbmc_base_dir / relative_folder
+        
+        cbmc_out_dir.mkdir(parents=True, exist_ok=True)
+        esbmc_out_dir.mkdir(parents=True, exist_ok=True)
+
+        print(f"🔄 Verifying: [{relative_folder}] {cpp_file.name}...")
         
         # 1. Run CBMC
-        cbmc_output = cbmc_runner.run(cpp_file)
+        cbmc_output = runner_cbmc.run(cpp_file)
         cbmc_path = cbmc_out_dir / f"{cpp_file.stem}_trace.txt"
         with open(cbmc_path, "w", encoding="utf-8") as f:
             f.write(cbmc_output)
 
         # 2. Run ESBMC
-        esbmc_output = esbmc_runner.run(cpp_file)
+        esbmc_output = runner_esbmc.run(cpp_file)
         esbmc_path = esbmc_out_dir / f"{cpp_file.stem}_trace.txt"
         with open(esbmc_path, "w", encoding="utf-8") as f:
             f.write(esbmc_output)
 
-        print(f"  ✅ CBMC trace -> {cbmc_path.name}")
-        print(f"  ✅ ESBMC trace -> {esbmc_path.name}\n")
+        print(f"  ✅ Saved CBMC  -> {cbmc_path.relative_to(project_root)}")
+        print(f"  ✅ Saved ESBMC -> {esbmc_path.relative_to(project_root)}\n")
 
-    print("🎉 Batch verification complete! All outputs generated.")
+    print("🎉 Batch verification complete! All subfolder outputs generated.")
 
 
 if __name__ == "__main__":
