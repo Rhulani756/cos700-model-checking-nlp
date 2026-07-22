@@ -224,4 +224,5 @@ frontend/.env.local
 
 # Python
 backend/__pycache__/
-backend/.venv/
+backend/.venv/esbmc.zip
+data/model_checker_outputs/
