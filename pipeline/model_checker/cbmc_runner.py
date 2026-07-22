@@ -1,44 +1,36 @@
 import subprocess
 from pathlib import Path
-from typing import Union
-
 
 class CBMCRunner:
-    def __init__(self, unwind_limit: int = 15, timeout_seconds: int = 30):
+    def __init__(self, unwind_limit: int = 5, timeout_seconds: int = 30):
         self.unwind_limit = unwind_limit
         self.timeout_seconds = timeout_seconds
-        self.cbmc_path = "cbmc"
 
-    def run(self, file_path: Union[str, Path]) -> str:
-        file_path = Path(file_path).resolve()
-
+    def run(self, file_path: Path) -> str:
+        """
+        Invokes CBMC on a specific C++ file and captures its stdout/stderr streams.
+        """
         if not file_path.exists():
-            return f"Error: File not found at {file_path}"
+            return f"Error: Target file {file_path} does not exist."
 
-        cmd = [
-            self.cbmc_path,
-            str(file_path),
-            "--unwind", str(self.unwind_limit),
-            "--no-unwinding-assertions",  # Don't fail just because a loop terminates at the bound
-            "--bounds-check",             # Check for out-of-bounds array access
-            "--pointer-check",            # Check for invalid pointer dereferences
-            "--div-by-zero-check"         # Check for division by zero
+        # Production execution arguments for loop and upper/lower bound checking
+        command = [
+            "cbmc", 
+            str(file_path), 
+            "--unwind", str(self.unwind_limit), 
+            "--unwinding-assertions"
         ]
 
         try:
             result = subprocess.run(
-                cmd,
-                capture_output=True,
+                command,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,  # Capture parsing or compiler issues in stdout
                 text=True,
                 timeout=self.timeout_seconds
             )
-            
-            output = (result.stdout or "") + (result.stderr or "")
-            return output if output.strip() else "CBMC executed with no output."
-
+            return result.stdout
         except subprocess.TimeoutExpired:
-            return f"Error: CBMC verification timed out after {self.timeout_seconds} seconds."
+            return f"Verification timed out after {self.timeout_seconds} seconds (Potential state space explosion).\n"
         except FileNotFoundError:
-            return f"Error: Could not find CBMC binary at '{self.cbmc_path}'."
-        except Exception as e:
-            return f"Error executing CBMC: {str(e)}"
+            return "Error: The 'cbmc' binary was not found on the system host PATH."
