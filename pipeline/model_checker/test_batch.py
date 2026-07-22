@@ -11,8 +11,8 @@ def run_all_tests():
     cbmc_base_dir = project_root / "data" / "model_checker_outputs" / "cbmc"
     esbmc_base_dir = project_root / "data" / "model_checker_outputs" / "esbmc"
 
-    runner_cbmc = CBMCRunner(unwind_limit=5, timeout_seconds=30)
-    runner_esbmc = ESBMCRunner(unwind_limit=5, timeout_seconds=30)
+    runner_cbmc = CBMCRunner(unwind_limit=15, timeout_seconds=30)
+    runner_esbmc = ESBMCRunner(unwind_limit=15, timeout_seconds=30)
 
     # rglob recursively searches all subdirectories (array_bounds, div_zero, etc.)
     cpp_files = list(programs_dir.rglob("*.cpp"))

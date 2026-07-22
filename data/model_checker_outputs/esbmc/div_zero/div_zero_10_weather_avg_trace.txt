@@ -1,8 +1,68 @@
-ESBMC version 8.2.0 64-bit x86_64 windows
-Target: 64-bit little-endian x86_64-unknown-windows with systemlibc
-Parsing C:\Users\kagis\OneDrive - University of Pretoria\COS 700 Research\Implementation\cos700-model-checking-nlp\data\programs\div_zero\div_zero_10_weather_avg.cpp
+ESBMC version 8.4.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_10_weather_avg.cpp
 Converting
-ERROR: unrecognized / unimplemented clang declaration PragmaDetectMismatch
-PragmaDetectMismatchDecl 0x19290e8dd08 <C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt\corecrt_stdio_config.h:72:21> col:21 "_CRT_STDIO_ISO_WIDE_SPECIFIERS" "0"
+Generating GOTO Program
+GOTO program creation time: 0.236s
+GOTO program processing time: 0.000s
+Starting Bounded Model Checking
+Symex completed in: 0.000s (43 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 3 assignments)
+Generated 4 VCC(s), 4 remaining after simplification (40 assignments)
+No solver specified; defaulting to bitwuzla
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver Bitwuzla 0.9.0
+Runtime decision procedure: 0.002s
+Building error trace
 
-ERROR: CONVERSION ERROR
+[Counterexample]
+
+
+State 1 file /tmp/esbmc.6f71-772b-ff11/headers/stdio.h line 29 column 1 thread 0
+----------------------------------------------------
+  stdin = 0
+
+State 2 file /tmp/esbmc.6f71-772b-ff11/headers/stdio.h line 30 column 1 thread 0
+----------------------------------------------------
+  stdout = 0
+
+State 3 file /tmp/esbmc.6f71-772b-ff11/headers/stdio.h line 31 column 1 thread 0
+----------------------------------------------------
+  stderr = 0
+
+State 4 file /home/runner/work/esbmc/esbmc/src/c2goto/library/io.c line 37 column 1 thread 0
+----------------------------------------------------
+  __esbmc_buffer_pending = 0 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 5 file /home/runner/work/esbmc/esbmc/src/c2goto/library/io.c line 38 column 1 thread 0
+----------------------------------------------------
+  __esbmc_error_state = 0 (00000000 00000000 00000000 00000000)
+
+State 6 file /home/runner/work/esbmc/esbmc/src/c2goto/library/io.c line 39 column 1 thread 0
+----------------------------------------------------
+  __esbmc_stream_mode = 0 (00000000 00000000 00000000 00000000)
+
+State 7 file /home/runner/work/esbmc/esbmc/src/c2goto/library/io.c line 40 column 1 thread 0
+----------------------------------------------------
+  __esbmc_currently_reading = 0 (00000000 00000000 00000000 00000000)
+
+State 8 file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_10_weather_avg.cpp line 11 column 5 function main thread 0
+----------------------------------------------------
+  temp_values = { 40, 0, 10 }
+
+State 9 file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_10_weather_avg.cpp line 14 column 5 function main thread 0
+----------------------------------------------------
+  index = 1 (00000000 00000000 00000000 00000001)
+
+State 13 file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_10_weather_avg.cpp line 17 column 5 function main thread 0
+----------------------------------------------------
+Violated property:
+  file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_10_weather_avg.cpp line 17 column 5 function main
+  division by zero
+  CWE: CWE-369
+  temp_values[(signed long int)index] != 0
+
+
+VERIFICATION FAILED

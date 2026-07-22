@@ -1,8 +1,87 @@
-ESBMC version 8.2.0 64-bit x86_64 windows
-Target: 64-bit little-endian x86_64-unknown-windows with systemlibc
-Parsing C:\Users\kagis\OneDrive - University of Pretoria\COS 700 Research\Implementation\cos700-model-checking-nlp\data\programs\div_zero\div_zero_08_library_books.cpp
+ESBMC version 8.4.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp
 Converting
-ERROR: unrecognized / unimplemented clang declaration PragmaDetectMismatch
-PragmaDetectMismatchDecl 0x1fe0427e128 <C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt\corecrt_stdio_config.h:72:21> col:21 "_CRT_STDIO_ISO_WIDE_SPECIFIERS" "0"
+Generating GOTO Program
+GOTO program creation time: 0.234s
+GOTO program processing time: 0.003s
+Starting Bounded Model Checking
+Unwinding loop 3 iteration 1   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 2   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 3   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 4   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 5   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 6   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 7   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 8   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 9   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 10   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 11   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 12   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 13   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Unwinding loop 3 iteration 14   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Not unwinding loop 3 iteration 15   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 14 column 5 function countdown_divide
+Symex completed in: 0.003s (164 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 36 assignments)
+Generated 46 VCC(s), 46 remaining after simplification (128 assignments)
+No solver specified; defaulting to bitwuzla
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver Bitwuzla 0.9.0
+Runtime decision procedure: 0.230s
+Building error trace
 
-ERROR: CONVERSION ERROR
+[Counterexample]
+
+
+State 1 file /tmp/esbmc.2f21-9c2a-2059/headers/stdio.h line 29 column 1 thread 0
+----------------------------------------------------
+  stdin = 0
+
+State 2 file /tmp/esbmc.2f21-9c2a-2059/headers/stdio.h line 30 column 1 thread 0
+----------------------------------------------------
+  stdout = 0
+
+State 3 file /tmp/esbmc.2f21-9c2a-2059/headers/stdio.h line 31 column 1 thread 0
+----------------------------------------------------
+  stderr = 0
+
+State 4 file /home/runner/work/esbmc/esbmc/src/c2goto/library/io.c line 37 column 1 thread 0
+----------------------------------------------------
+  __esbmc_buffer_pending = 0 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 5 file /home/runner/work/esbmc/esbmc/src/c2goto/library/io.c line 38 column 1 thread 0
+----------------------------------------------------
+  __esbmc_error_state = 0 (00000000 00000000 00000000 00000000)
+
+State 6 file /home/runner/work/esbmc/esbmc/src/c2goto/library/io.c line 39 column 1 thread 0
+----------------------------------------------------
+  __esbmc_stream_mode = 0 (00000000 00000000 00000000 00000000)
+
+State 7 file /home/runner/work/esbmc/esbmc/src/c2goto/library/io.c line 40 column 1 thread 0
+----------------------------------------------------
+  __esbmc_currently_reading = 0 (00000000 00000000 00000000 00000000)
+
+State 8 file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 23 column 5 function main thread 0
+----------------------------------------------------
+  start = 0 (00000000 00000000 00000000 00000000)
+
+State 11 file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 11 column 5 function countdown_divide thread 0
+----------------------------------------------------
+  value = 1000 (00000000 00000000 00000011 11101000)
+
+State 12 file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 12 column 5 function countdown_divide thread 0
+----------------------------------------------------
+  step = 0 (00000000 00000000 00000000 00000000)
+
+State 13 file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 15 column 9 function countdown_divide thread 0
+----------------------------------------------------
+Violated property:
+  file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/div_zero/div_zero_08_library_books.cpp line 15 column 9 function countdown_divide
+  division by zero
+  CWE: CWE-369
+  step != 0
+
+
+VERIFICATION FAILED

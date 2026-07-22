@@ -1,8 +1,35 @@
-ESBMC version 8.2.0 64-bit x86_64 windows
-Target: 64-bit little-endian x86_64-unknown-windows with systemlibc
-Parsing C:\Users\kagis\OneDrive - University of Pretoria\COS 700 Research\Implementation\cos700-model-checking-nlp\data\programs\infinite_loop\infinite_loop_02_temperature_log.cpp
+ESBMC version 8.4.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp
 Converting
-ERROR: unrecognized / unimplemented clang declaration PragmaDetectMismatch
-PragmaDetectMismatchDecl 0x215fc22cbf8 <C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt\corecrt_stdio_config.h:72:21> col:21 "_CRT_STDIO_ISO_WIDE_SPECIFIERS" "0"
+Generating GOTO Program
+GOTO program creation time: 0.300s
+GOTO program processing time: 0.003s
+Starting Bounded Model Checking
+Unwinding loop 6 iteration 1   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 2   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 3   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 4   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 5   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 6   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 7   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 8   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 9   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 10   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 11   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 12   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 13   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Unwinding loop 6 iteration 14   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Not unwinding loop 6 iteration 15   file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/infinite_loop/infinite_loop_02_temperature_log.cpp line 19 column 5 function main
+Symex completed in: 0.004s (116 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 19 assignments)
+Generated 15 VCC(s), 15 remaining after simplification (97 assignments)
+No solver specified; defaulting to bitwuzla
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver Bitwuzla 0.9.0
+Runtime decision procedure: 0.009s
+BMC program time: 0.015s
 
-ERROR: CONVERSION ERROR
+VERIFICATION SUCCESSFUL
