@@ -1,0 +1,8 @@
+ESBMC version 8.2.0 64-bit x86_64 windows
+Target: 64-bit little-endian x86_64-unknown-windows with systemlibc
+Parsing C:\Users\kagis\OneDrive - University of Pretoria\COS 700 Research\Implementation\cos700-model-checking-nlp\data\programs\array_bounds\array_bounds_19_game_scores.cpp
+Converting
+ERROR: unrecognized / unimplemented clang declaration PragmaDetectMismatch
+PragmaDetectMismatchDecl 0x2d5be69f508 <C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt\corecrt_stdio_config.h:72:21> col:21 "_CRT_STDIO_ISO_WIDE_SPECIFIERS" "0"
+
+ERROR: CONVERSION ERROR

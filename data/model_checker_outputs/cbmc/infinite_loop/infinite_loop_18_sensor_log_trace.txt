@@ -1,0 +1,215 @@
+[main.overflow.1] Line ? arithmetic overflow on signed + in i + 2: FAILURE
+[_vfwprintf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_p_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_p_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_p_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_p_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_p_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwprintf_p_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vfwscanf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfwscanf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfwscanf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfwscanf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfwscanf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfwscanf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfwscanf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfwscanf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfwscanf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfwscanf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfwscanf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfwscanf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwprintf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnwprintf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnwprintf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnwprintf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnwprintf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnwprintf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnwprintf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnwprintf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnwprintf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnwprintf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnwprintf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnwprintf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_c_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_c_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_c_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_c_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_c_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_c_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_p_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_p_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_p_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_p_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_p_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vswprintf_p_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_p_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_p_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_p_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_p_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_p_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vscwprintf_p_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vswscanf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_vswscanf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_vswscanf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vswscanf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vswscanf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_vswscanf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_vswscanf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_vswscanf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_vswscanf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vswscanf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vswscanf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_vswscanf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnwscanf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfprintf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_p_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_p_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_p_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_p_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_p_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vfprintf_p_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vfscanf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfscanf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfscanf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfscanf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfscanf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfscanf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfscanf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfscanf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfscanf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfscanf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfscanf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_vfscanf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsnprintf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[vsnprintf.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[vsnprintf.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[vsnprintf.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[vsnprintf.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[vsnprintf.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[vsnprintf.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_p_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_p_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_p_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_p_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_p_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vsprintf_p_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_p_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_p_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_p_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_p_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_p_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vscprintf_p_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_c_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_c_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_c_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_c_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_c_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_printf_options: SUCCESS
+[_vsnprintf_c_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_printf_options: SUCCESS
+[_vsscanf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsscanf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsscanf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsscanf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsscanf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsscanf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsscanf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsscanf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsscanf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsscanf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsscanf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_vsscanf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s_l.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s_l.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s_l.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s_l.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s_l.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s_l.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s.pointer_dereference.1] Line ? dereference failure: pointer NULL in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s.pointer_dereference.2] Line ? dereference failure: pointer invalid in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s.pointer_dereference.3] Line ? dereference failure: deallocated dynamic object in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s.pointer_dereference.4] Line ? dereference failure: dead object in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s.pointer_dereference.5] Line ? dereference failure: pointer outside object bounds in *return_value___local_stdio_scanf_options: SUCCESS
+[_snscanf_s.pointer_dereference.6] Line ? dereference failure: invalid integer address in *return_value___local_stdio_scanf_options: SUCCESS
+[main.no-body.__VERIFIER_assume(signed_int)] Line ? no body for callee __VERIFIER_assume(signed int): FAILURE
+[printf.no-body.__acrt_iob_func] Line ? no body for callee __acrt_iob_func(unsigned int): FAILURE
+[_vfprintf_l.no-body.__stdio_common_vfprintf] Line ? no body for callee __stdio_common_vfprintf(unsigned long long int, struct _iobuf *, const char *, _locale_t, va_list): FAILURE
+[main.unwind.0] Line ? unwinding assertion loop 0: FAILURE

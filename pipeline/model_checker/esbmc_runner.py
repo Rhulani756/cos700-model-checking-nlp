@@ -1,3 +1,4 @@
+import os
 import subprocess
 from pathlib import Path
 from typing import Union
@@ -7,7 +8,6 @@ class ESBMCRunner:
     def __init__(self, unwind_limit: int = 5, timeout_seconds: int = 30):
         self.unwind_limit = unwind_limit
         self.timeout_seconds = timeout_seconds
-        # Direct path to esbmc binary
         self.esbmc_path = r"C:\Tools\ESBMC\bin\esbmc.exe"
 
     def run(self, file_path: Union[str, Path]) -> str:
@@ -16,15 +16,25 @@ class ESBMCRunner:
         if not file_path.exists():
             return f"Error: File not found at {file_path}"
 
+        # 1. Environment configuration equivalent to Linux CPLUS_INCLUDE_PATH
+        env = os.environ.copy()
+        esbmc_base = Path(self.esbmc_path).parent.parent
+        esbmc_include = esbmc_base / "include"
+
+        if esbmc_include.exists():
+            env["CPLUS_INCLUDE_PATH"] = str(esbmc_include)
+            env["C_INCLUDE_PATH"] = str(esbmc_include)
+
+        # 2. ESBMC execution flags
         cmd = [
             self.esbmc_path,
             str(file_path),
             "--unwind", str(self.unwind_limit),
-            "--compact-trace",      # Compact trace for parser teammate
+            "--compact-trace",
             "--overflow-check",
-            # Bypass MSVC STL compiler version assertion check
-            "-D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH",
-            "-D_CRT_SECURE_NO_WARNINGS"
+            "--no-library",   # Ignores native MSVC library headers that cause STL1000 errors
+            # Direct preprocessor define passed to Clang to bypass MSVC version assertions
+            "-D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH"
         ]
 
         try:
@@ -32,10 +42,10 @@ class ESBMCRunner:
                 cmd,
                 capture_output=True,
                 text=True,
-                timeout=self.timeout_seconds
+                timeout=self.timeout_seconds,
+                env=env
             )
             
-            # Combine stdout and stderr as requested by parser teammate
             output = (result.stdout or "") + (result.stderr or "")
             return output if output.strip() else "ESBMC executed with no output."
 
