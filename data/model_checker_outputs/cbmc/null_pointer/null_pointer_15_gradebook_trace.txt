@@ -1,5 +1,0 @@
-CBMC version 6.6.0 (cbmc-6.6.0) 64-bit x86_64 linux
-Type-checking null_pointer_15_gradebook
-**** WARNING: Use --unwinding-assertions to obtain sound verification results
-file /mnt/c/Users/kagis/OneDrive - University of Pretoria/COS 700 Research/Implementation/cos700-model-checking-nlp/data/programs/null_pointer/null_pointer_15_gradebook.cpp line 19 function find_mark: symbol 'nullptr' is unknown
-CONVERSION ERROR
