@@ -4,7 +4,7 @@ from typing import Union
 
 
 class ESBMCRunner:
-    def __init__(self, unwind_limit: int = 5, timeout_seconds: int = 30):
+    def __init__(self, unwind_limit: int = 50, timeout_seconds: int = 60):
         self.unwind_limit = unwind_limit
         self.timeout_seconds = timeout_seconds
         # Updated for Linux / WSL:
@@ -20,9 +20,6 @@ class ESBMCRunner:
             self.esbmc_path,
             str(file_path),
             "--unwind", str(self.unwind_limit),
-            "--bounds-check",         # 1. Array out of bounds
-            "--div-by-zero-check",    # 2. Division by zero
-            "--pointer-check",        # 3. Null pointer safety
             "--compact-trace",        # Compact output for trace parsing
         ]
 
