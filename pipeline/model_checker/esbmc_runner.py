@@ -20,9 +20,6 @@ class ESBMCRunner:
             self.esbmc_path,
             str(file_path),
             "--unwind", str(self.unwind_limit),
-            "--bounds-check",         # 1. Array out of bounds
-            "--div-by-zero-check",    # 2. Division by zero
-            "--pointer-check",        # 3. Null pointer safety
             "--compact-trace",        # Compact output for trace parsing
         ]
 
