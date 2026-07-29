@@ -1,0 +1,5 @@
+CBMC version 6.6.0 (cbmc-6.6.0) 64-bit x86_64 linux
+Type-checking null_pointer_05_matrix_calc
+**** WARNING: Use --unwinding-assertions to obtain sound verification results
+file /usr/include/stdlib.h line 145: symbol '_Float32' is unknown
+CONVERSION ERROR
