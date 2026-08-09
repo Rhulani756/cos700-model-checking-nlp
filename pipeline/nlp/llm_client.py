@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import logging
 import os
 import time
 from typing import Any, Dict
@@ -15,6 +16,7 @@ ENV_FILE = Path(__file__).resolve().parent / ".env"
 load_dotenv(dotenv_path=ENV_FILE)
 
 from .exceptions import ConfigurationError, LLMGenerationError
+from .feedback_enrichment import enrich_with_diagram_async
 from .prompt_builder import PROMPT_VERSION, PromptBuilder
 from .providers import AnthropicProvider, GeminiProvider, LLMProvider
 from .schemas import (
@@ -24,6 +26,7 @@ from .schemas import (
     ViolationType,
 )
 
+logger = logging.getLogger(__name__)
 
 
 DEFAULT_MODELS = {
@@ -40,9 +43,10 @@ class LLMClient:
         provider: LLMProvider,
         prompt_builder: PromptBuilder | None = None,
         max_tokens: int = 1400,
-        temperature: float = 0.2,
+        temperature: float = 0.5,
         validation_attempts: int = 2,
         fallback_on_error: bool = True,
+        include_diagram: bool = True,
     ) -> None:
         if validation_attempts < 1:
             raise ValueError("validation_attempts must be at least 1")
@@ -52,6 +56,7 @@ class LLMClient:
         self.temperature = temperature
         self.validation_attempts = validation_attempts
         self.fallback_on_error = fallback_on_error
+        self.include_diagram = include_diagram
 
     @classmethod
     def from_env(cls) -> "LLMClient":
@@ -89,6 +94,8 @@ class LLMClient:
             validation_attempts=int(os.getenv("LLM_VALIDATION_ATTEMPTS", "2")),
             fallback_on_error=os.getenv("LLM_FALLBACK_ON_ERROR", "true").lower()
             in {"1", "true", "yes"},
+            include_diagram=os.getenv("LLM_INCLUDE_DIAGRAM", "true").lower()
+            in {"1", "true", "yes"},
         )
 
     async def generate_feedback(
@@ -119,7 +126,7 @@ class LLMClient:
             used_fallback = True
 
         latency_ms = int((time.perf_counter() - start) * 1000)
-        return FeedbackGenerationResult(
+        result = FeedbackGenerationResult(
             feedback=feedback,
             provider=self.provider.name,
             model=self.provider.model,
@@ -127,6 +134,32 @@ class LLMClient:
             used_fallback=used_fallback,
             latency_ms=latency_ms,
         )
+
+        if self.include_diagram:
+            result = await self._safe_enrich_with_diagram(result, counterexample)
+
+        return result
+
+    async def _safe_enrich_with_diagram(
+        self,
+        result: FeedbackGenerationResult,
+        counterexample: Counterexample,
+    ) -> FeedbackGenerationResult:
+        """Diagram generation must never take down an otherwise-valid response.
+
+        enrich_with_diagram_async already catches DiagramRenderError
+        internally. This is a second, broader net around it, so a bug in
+        diagram construction itself (not just a render-server failure)
+        degrades to a missing diagram instead of losing the text feedback
+        that already succeeded.
+        """
+
+        try:
+            return await enrich_with_diagram_async(result, counterexample)
+        except Exception as exc:  # noqa: BLE001 - diagram failures are always non-fatal
+            logger.warning("Diagram enrichment failed unexpectedly: %s", exc)
+            result.diagram_render_error = str(exc)
+            return result
 
     def generate_feedback_sync(
         self, parser_output: Counterexample | Dict[str, Any]

@@ -1,12 +1,26 @@
-Focus on the pointer that is dereferenced without being proven valid.
+Root-cause candidates to weigh against the trace (root_cause) — name the
+one the evidence supports, or say the evidence doesn't distinguish:
+- a missing null check before the dereference
+- an unchecked return value from something that can return null (lookup,
+  allocation, optional-returning function)
+- a null check present earlier in the function that doesn't cover the
+  path the trace actually takes
 
-When the counterexample contains enough evidence, explain:
-- the pointer expression involved, such as *ptr, ptr[index], or ptr->member;
-- where the pointer is initialized, assigned, returned, or left null;
-- the branch, input, failed allocation, or failed lookup that permits the null value to reach the dereference;
-- the exact source location and pointer value shown by the trace;
-- the validity condition that should hold before the dereference.
+evidence / execution_path: trace the pointer from where it was last
+assigned (or left uninitialized) on the failing path to the line where
+it is dereferenced. Only describe a null check as "missing" if the trace
+shows the failing path bypassing it — not because none is visible in the
+snippet.
 
-Distinguish the immediate failure from the earlier logical cause. A null check immediately before the dereference may prevent the crash, but it may not correct the path that incorrectly produced or propagated the null pointer.
+suggested_changes: phrase each item as something to verify (e.g. "check
+whether every path to this line passes through a null check first"), not
+as a specific check to add. Never state the exact conditional to insert.
 
-Do not claim that a pointer is null unless the source or trace shows it. Do not invent ownership, lifetime, allocation, or initialization facts. Suggest deliberate initialization, explicit handling of failure paths, and a validity check only when those changes fit the supplied evidence.
+example_fix: only populate if the trace shows clearly where the null
+value originates. Illustrate the *pattern* (e.g. a generic null-check
+guard) with placeholder names, not the student's own pointer name wired
+into a working guard. Otherwise leave empty and reflect the gap in
+confidence.
+
+check_your_understanding: ask whether all paths to the dereference are
+covered by a check, not about null pointers in general.

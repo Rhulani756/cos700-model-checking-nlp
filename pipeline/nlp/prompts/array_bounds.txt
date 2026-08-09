@@ -1,12 +1,25 @@
-Focus on the exact array, pointer-offset, or buffer access that violates a bound.
+Root-cause candidates to weigh against the trace (root_cause) — name the
+one the evidence supports, or say the evidence doesn't distinguish:
+- an off-by-one loop condition (<= vs <, or the reverse)
+- an index computed from unchecked input or arithmetic
+- a negative index reaching the access
+- a size/bound value that no longer matches the buffer it describes
 
-When the counterexample contains enough evidence, explain:
-- the array or buffer being accessed;
-- the failing index or offset value;
-- the valid index range, but only when the size or bound is present in the source or trace;
-- whether the path suggests an off-by-one loop condition, a negative index, or an incorrect index calculation;
-- that an array of size N has valid indices 0 through N - 1.
+evidence / execution_path: trace the index's value from where it's set or
+last updated to the line where the out-of-bounds access occurs. The bound
+(array size, buffer length) only counts as evidence if it appears
+explicitly in the source or trace — do not infer it from a declaration
+you can't see.
 
-Use the reported source line and final relevant variable values as evidence. Explain the path that allows the invalid index to reach the access.
+suggested_changes: phrase each item as something to verify (e.g. "check
+what value the index holds on the final loop iteration"), not as an edit
+to make. Never state the corrected comparison operator or bound value.
 
-Do not invent an array size, index value, or loop condition. If the checker reports only a bounds violation without enough values, state what evidence is missing and lower the confidence. Prefer guidance such as using an exclusive upper bound or validating an index before access. Do not recommend increasing the array size unless the supplied task requirements and trace justify that change.
+example_fix: only populate if the trace shows both the index expression
+and its update rule with enough certainty to illustrate the *pattern*.
+Use generic variable names (e.g. i, n), not the student's own identifiers
+combined into a working version of their loop. Otherwise leave empty and
+reflect the gap in confidence.
+
+check_your_understanding: ask about the relationship between the index
+and the bound at the exact point of failure, not about arrays in general.

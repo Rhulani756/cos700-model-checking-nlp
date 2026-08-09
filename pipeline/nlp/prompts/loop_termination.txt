@@ -1,13 +1,30 @@
-Treat loop-termination findings carefully because bounded model checking explores execution only up to a configured unwind bound.
+Root-cause candidates to weigh against the trace (root_cause) — name the
+one the evidence supports, or say the evidence doesn't distinguish:
+- the loop variable is never updated on some path
+- the loop variable is updated in a direction that moves away from the
+  guard condition rather than toward it
+- the guard condition depends on state the loop body doesn't change
 
-When the counterexample contains enough evidence, explain:
-- the loop condition and the variables that control it;
-- the initial values of those variables;
-- how the variables change, or fail to change, on each relevant path;
-- whether each update moves execution toward making the condition false;
-- whether a branch, continue statement, reset, arithmetic wraparound, or unchanged variable prevents progress;
-- the final trace state near the unwind or termination failure.
+Distinguish, based only on what the checker reported, between an
+unwinding-bound violation (unwind limit reached without proving
+termination) and a demonstrated non-terminating path. Don't default to
+one if the report doesn't say which — reflect the ambiguity in
+confidence if it matters.
 
-Use "may not terminate" or "the checker could not prove termination within the configured bound" unless the trace clearly establishes a repeating state or a condition that can never become false. Distinguish a genuinely non-progressing loop from an unwind bound that may simply be too small.
+evidence / execution_path: trace the loop variable's value across the
+iterations shown in the trace, up to the point the checker stopped
+verifying.
 
-Do not state that the loop is infinite solely because an unwinding assertion failed. Suggest checking the progress measure, updating the control variable on every relevant path, correcting the condition, or reviewing the unwind bound according to the evidence.
+suggested_changes: phrase each item as something to verify (e.g. "does
+this variable change on every path through the loop body?"), not as a
+specific fix to the update or guard. Never state the corrected update
+statement or condition.
+
+example_fix: only populate if the trace shows enough iterations to
+illustrate the *pattern* of the missing/wrong update. Use placeholder
+names, not the student's own loop rewritten to terminate. Otherwise leave
+empty and reflect the gap in confidence.
+
+check_your_understanding: ask whether the loop variable moves toward or
+away from the guard condition on each iteration, not about loops in
+general.

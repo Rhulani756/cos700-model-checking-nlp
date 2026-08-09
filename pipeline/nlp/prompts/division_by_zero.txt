@@ -1,12 +1,23 @@
-Focus on the expression used as the divisor and the execution path on which its value becomes zero.
+Root-cause candidates to weigh against the trace (root_cause) — name the
+one the evidence supports, or say the evidence doesn't distinguish:
+- an unvalidated input used directly as a divisor
+- a divisor computed from a subtraction/difference that can reach zero
+- a divisor whose value depends on a branch or loop outcome the trace
+  shows taking an unexpected path
 
-When the counterexample contains enough evidence, explain:
-- the division or remainder expression that fails;
-- the divisor value immediately before the operation;
-- how input, subtraction, counters, lookup results, or another calculation produces zero;
-- the branch conditions that allow execution to reach the operation;
-- whether zero represents invalid input or a valid case that needs separate behaviour.
+evidence / execution_path: trace the divisor's value from where it's
+computed or received to the line of the division/modulo. Only describe
+its origin (input, computation, prior branch) if the trace actually shows
+that origin.
 
-Use the reported source line and divisor value as evidence. Guide the student to define the intended zero case and to validate or constrain the divisor before evaluating the operation.
+suggested_changes: phrase each item as something to verify (e.g. "check
+what value this expression takes when the two operands are equal"), not
+as a specific guard to add. Never state the exact conditional to insert.
 
-Do not claim that the divisor is always zero when the counterexample demonstrates only one failing path. Do not invent an input value or expression that is absent from the supplied data. Do not suggest replacing division with an unrelated operation merely to suppress the checker failure.
+example_fix: only populate if the trace shows clearly how the divisor
+reaches zero. Illustrate the *pattern* (e.g. a generic zero-check guard)
+with placeholder names, not the student's own variables wired into a
+working guard. Otherwise leave empty and reflect the gap in confidence.
+
+check_your_understanding: ask what value the divisor takes on the failing
+path, not about division by zero in general.
