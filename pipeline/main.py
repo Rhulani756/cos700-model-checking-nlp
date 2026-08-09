@@ -7,6 +7,7 @@ from typing import Any, Dict, Union
 
 from model_checker.esbmc_runner import ESBMCRunner
 from parser.counterexample_parser import parse
+from snippet import extract_snippet
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,16 @@ def run_pipeline(submission_path: Union[str, Path]) -> Dict[str, Any]:
     parsed_output = parse(raw_output)
     logger.debug("Parsed output:\n%s", parsed_output)
 
-    return parsed_output # TODO change later
+    if parsed_output.get("verification_result") != "FAILED":
+        logger.info("No violation detected; skipping feedback generation.")
+        return parsed_output
+
+    snippet = extract_snippet(submission_path, parsed_output["line"])
+    logger.debug("Extracted snippet (lines 1-%d):\n%s", parsed_output["line"], snippet)
+
+    # result = client.generate_feedback_sync(parsed_output, snippet)
+
+    return parsed_output # TODO change to "result" later
 
 
 if __name__ == "__main__":
