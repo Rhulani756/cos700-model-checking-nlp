@@ -15,3 +15,6 @@ class LLMGenerationError(NLPError):
 
 class UnsupportedViolationError(NLPError):
     """Raised when no prompt exists for a violation type."""
+
+class DiagramRenderError(RuntimeError):
+    """Raised when a PlantUML source string fails to render."""

@@ -382,6 +382,34 @@ class Counterexample(BaseModel):
         return normalize_violation_type(value)
 
 
+class StepAnnotation(BaseModel):
+    """A short, LLM-authored note pinned to one trace step.
+
+    This is the only diagram-related content the LLM is allowed to
+    produce. It supplies text, never PlantUML syntax, so it can never
+    break rendering the way freeform LLM-authored diagram code did in
+    testing (see array_bounds diagram exploration, Claude's first
+    attempt).
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    step: int = Field(ge=0, description="Must match a TraceStep.step from the counterexample.")
+    note: str = Field(
+        min_length=1,
+        max_length=160,
+        description="One short, Socratic-leaning observation about this step.",
+    )
+
+    @field_validator("note")
+    @classmethod
+    def strip_note(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("note may not be blank")
+        return value
+
+
 class PedagogicalFeedback(BaseModel):
     """Structured feedback returned to the formatter and API layer."""
 
@@ -410,6 +438,14 @@ class PedagogicalFeedback(BaseModel):
     )
     confidence: Literal["high", "medium", "low"] = Field(
         description="Confidence based only on the evidence available in the counterexample."
+    )
+    step_annotations: List[StepAnnotation] = Field(
+        default_factory=list,
+        description=(
+            "Optional short notes keyed to specific trace step numbers, for the "
+            "execution-path diagram. Only reference steps that appear in the "
+            "supplied counterexample trace. Omit entirely rather than guess."
+        ),
     )
 
     @field_validator(
@@ -444,3 +480,10 @@ class FeedbackGenerationResult(BaseModel):
     prompt_version: str
     used_fallback: bool = False
     latency_ms: int = Field(ge=0)
+
+    # Diagram fields are populated after generation, by diagram_builder /
+    # plantuml_renderer — never by the LLM directly. Both default to empty
+    # so existing callers that don't request a diagram are unaffected.
+    diagram_plantuml: str = ""
+    diagram_svg: str = ""
+    diagram_render_error: str = ""

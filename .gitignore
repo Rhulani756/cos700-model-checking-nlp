@@ -229,3 +229,8 @@ backend/.venv/
 .env
 backend/.env
 frontend/.env.local
+
+
+
+#tester
+output.txt
