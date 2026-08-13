@@ -1,0 +1,38 @@
+First:
+
+Frontend:
+cd frontend
+npm install
+npm run dev
+
+Check if running in browser: localhost:3000
+
+===============================================================
+
+Save .env in directory backend/nlp
+.env content:
+
+LLM_PROVIDER=gemini
+LLM_MODEL=gemini-3.1-flash-lite
+GEMINI_API_KEY=
+
+PLANTUML_SERVER_URL=https://www.plantuml.com/plantuml
+
+===============================================================
+
+Backend:
+
+//from project root directory
+
+python -m venv .venv
+source .venv/bin/activate
+
+pip install -r backend/requirements.text
+pip install -r pipeline/nlp/requirements.text
+
+Test pipeline:
+python -m pipeline.pipeline_test > output.txt
+
+// If this runs continue to this:
+
+python -m uvicorn backend.main:app --reload
