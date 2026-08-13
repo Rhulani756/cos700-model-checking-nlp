@@ -107,6 +107,8 @@ class LLMClient:
             else Counterexample.model_validate(parser_output)
         )
         system_prompt, user_prompt = self.prompt_builder.build(counterexample)
+        logger.debug("SYSTEM PROMPT:\n%s", system_prompt)
+        logger.debug("USER PROMPT:\n%s", user_prompt)
         output_schema = PedagogicalFeedback.model_json_schema()
 
         start = time.perf_counter()

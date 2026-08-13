@@ -93,9 +93,30 @@ export default function Home() {
     });
   };
 
-  const clearAllFiles = () => {
+  const clearAllFiles = async () => {
     setselectedFiles([]);
     setPanelMode(PANEL.NONE);
+    try {
+      // delete
+      const uploadRes = await fetch("http://localhost:8000/api/delete", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!uploadRes.ok) {
+        const errBody = await uploadRes.json().catch(() => ({}));
+        throw new Error(
+          errBody.detail ||
+          `Delete failed with status ${uploadRes.status}`
+        );
+      }
+
+    } catch (err) {
+      setError(err.message || "Delete failed. Please try again.");
+      setPanelMode(PANEL.NONE);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const closePanel = () => {
