@@ -75,7 +75,10 @@ def parse(raw_output: str) -> dict:
             # if the third line is not empty
             if i + 3 < len(lines) and lines[i + 3].strip() != "":
                 # save the additional information
-                result["violation_description"] = lines[i + 3].strip()
+                possible_cwe = lines[i + 3].strip()
+                if "CWE" in possible_cwe:
+                    # skip adding CWE to the result
+                    result["violation_description"] = lines[i + 4].strip()
             else:
                 result["violation_description"] = None
 
@@ -83,6 +86,9 @@ def parse(raw_output: str) -> dict:
 
     result["states"] = []
     entry = {}
+
+    # to keep track of the current state's filename
+    # file_name = None
 
     # grab state information
     for i, line in enumerate(lines[state_begin_line:]):
@@ -96,6 +102,8 @@ def parse(raw_output: str) -> dict:
 
         if first_character == "S":
             state = parse_state_line(line)
+            # file_name = state["file"]
+            # if result.get("file") == state["file"]: # report only states from the submitted file
             entry["state_number"] = state["state_number"]
             entry["line"] = state["line"]
             entry["function"] = state["function"]
@@ -108,6 +116,7 @@ def parse(raw_output: str) -> dict:
             result["states"].append(entry)
             break
         else:
+            # if file_name == result["file"]:
             assignment = line.strip()
             if " (" in assignment:
                 assignment = assignment[:assignment.index(" (")]
