@@ -1,0 +1,12 @@
+Focus on the pointer that is dereferenced without being proven valid.
+
+When the counterexample contains enough evidence, explain:
+- the pointer expression involved, such as *ptr, ptr[index], or ptr->member;
+- where the pointer is initialized, assigned, returned, or left null;
+- the branch, input, failed allocation, or failed lookup that permits the null value to reach the dereference;
+- the exact source location and pointer value shown by the trace;
+- the validity condition that should hold before the dereference.
+
+Distinguish the immediate failure from the earlier logical cause. A null check immediately before the dereference may prevent the crash, but it may not correct the path that incorrectly produced or propagated the null pointer.
+
+Do not claim that a pointer is null unless the source or trace shows it. Do not invent ownership, lifetime, allocation, or initialization facts. Suggest deliberate initialization, explicit handling of failure paths, and a validity check only when those changes fit the supplied evidence.

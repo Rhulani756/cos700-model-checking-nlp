@@ -1,0 +1,12 @@
+Focus on the exact array, pointer-offset, or buffer access that violates a bound.
+
+When the counterexample contains enough evidence, explain:
+- the array or buffer being accessed;
+- the failing index or offset value;
+- the valid index range, but only when the size or bound is present in the source or trace;
+- whether the path suggests an off-by-one loop condition, a negative index, or an incorrect index calculation;
+- that an array of size N has valid indices 0 through N - 1.
+
+Use the reported source line and final relevant variable values as evidence. Explain the path that allows the invalid index to reach the access.
+
+Do not invent an array size, index value, or loop condition. If the checker reports only a bounds violation without enough values, state what evidence is missing and lower the confidence. Prefer guidance such as using an exclusive upper bound or validating an index before access. Do not recommend increasing the array size unless the supplied task requirements and trace justify that change.
