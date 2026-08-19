@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-# Constructs prompts from structured counterexample and queries LLM
-
-def generate_feedback(structured_counterexample: dict) -> str:
-    pass
-=======
 from __future__ import annotations
 
 import asyncio
@@ -237,10 +231,6 @@ class LLMClient:
                     "C++ array indices must stay between 0 and one less than the number "
                     "of elements. Accessing another position can read or overwrite unrelated memory."
                 ),
-                "changes": [
-                    "Check the loop boundary and any index calculation used at the reported line.",
-                    "Confirm that the index is at least 0 and strictly smaller than the array size before access.",
-                ],
                 "question": "What are the smallest and largest valid indices for this array?",
             },
             ViolationType.NULL_SAFETY: {
@@ -249,10 +239,6 @@ class LLMClient:
                     "A null pointer does not refer to an object. Using *pointer or pointer->member "
                     "when it is null has undefined behaviour."
                 ),
-                "changes": [
-                    "Trace where the pointer is assigned and identify the path on which it remains null.",
-                    "Validate the pointer before dereferencing it, and handle the null case explicitly.",
-                ],
                 "question": "Which condition guarantees that the pointer refers to a valid object?",
             },
             ViolationType.LOOP_TERMINATION: {
@@ -261,10 +247,6 @@ class LLMClient:
                     "A loop terminates only when its condition eventually becomes false. The checker "
                     "could not establish that this happens within the configured bound."
                 ),
-                "changes": [
-                    "Identify the variables used by the loop condition and confirm that every path updates them.",
-                    "Check that each update moves the variables toward making the condition false.",
-                ],
                 "question": "Which value changes on every iteration and why must it eventually stop the loop?",
             },
             ViolationType.DIVISION_BY_ZERO: {
@@ -273,10 +255,6 @@ class LLMClient:
                     "Integer or floating-point division requires a valid divisor. A zero divisor can "
                     "cause undefined behaviour, a runtime failure, or an invalid result."
                 ),
-                "changes": [
-                    "Find how the divisor obtains its value on the failing path.",
-                    "Reject or handle zero before performing the division, or strengthen the input precondition.",
-                ],
                 "question": "What program behaviour should occur when the divisor is zero?",
             },
         }[counterexample.violation_type]
@@ -295,7 +273,6 @@ class LLMClient:
                 "Inspect the final state and variable values immediately before the property fails.",
             ],
             why_it_matters=property_data["concept"],
-            suggested_changes=property_data["changes"],
             example_fix="",
             check_your_understanding=property_data["question"],
             confidence="low",
@@ -325,4 +302,3 @@ class LLMClient:
         if variable_text:
             details += " with %s" % variable_text
         return details + "."
->>>>>>> origin/feature/ui+pipeline
