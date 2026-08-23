@@ -57,11 +57,14 @@ class ESBMCParser:
 
     def parse_singular(self, lines: list) -> dict:
         """
-        Parses the model checker output for a single property verification.
+        Parses the model checker output for single property verification.
         :param lines:
-        :return:
+        :return: Dict containing the verification result, filename, line, column, function, violation type, violation description, and states
         """
+
+        # default to UNKNOWN verification result if the model checker returned anything other than FAILED or SUCCESSFUL
         result = {}
+        result["verification_result"] = "UNKNOWN"
 
         for line in lines:
             if "VERIFICATION FAILED" in line:
@@ -69,9 +72,6 @@ class ESBMCParser:
                 break
             elif "VERIFICATION SUCCESSFUL" in line:
                 result["verification_result"] = "SUCCESSFUL"
-                break
-            elif "VERIFICATION UNKNOWN" in line:
-                result["verification_result"] = "UNKNOWN"
                 break
 
         # only failed verifications have counterexamples
@@ -82,71 +82,96 @@ class ESBMCParser:
 
         # grab violated property information
         for i, line in enumerate(lines):
+
             if line.strip() == "[Counterexample]":
-                state_begin_line = i + 3  # save the line number of the first state
+                # save the line number of the first state
+                state_begin_line = i + 3
+
             if line.strip() == "Violated property:":
                 # line 2 — file/line/column/function
-                loc = self.parse_location_line(lines[i + 1])
+                i += 1
+                loc = self.parse_location_line(lines[i])
                 result["file"] = loc["file"]
                 result["line"] = loc["line"]
                 result["column"] = loc["column"]
                 result["function"] = loc["function"]
 
                 # line 3 — violation type
-                result["violation_type"] = lines[i + 2].strip()
+                i += 1
+                result["violation_type"] = lines[i].strip()
 
-                # line 4 — optional condition
-                # if the third line is not empty
-                if i + 3 < len(lines) and lines[i + 3].strip() != "":
-                    # save the additional information
-                    possible_cwe = lines[i + 3].strip()
-                    if "CWE" in possible_cwe:
-                        # skip adding CWE to the result
-                        result["violation_description"] = lines[i + 4].strip()
-                else:
-                    result["violation_description"] = None
+                # default violation description to None
+                result["violation_description"] = None
+                i += 1
+
+                while i < len(lines) and lines[i].strip() and "VERIFICATION" not in lines[i]:
+                    line = lines[i].strip()
+
+                    # ignore CWE lines
+                    if line.startswith("CWE"):
+                        pass
+                    else:
+                        # save the violation description
+                        result["violation_description"] = line
+                    i += 1
 
                 break
 
         result["states"] = []
         entry = {}
 
-        # to keep track of the current state's filename
-        # file_name = None
+        if state_begin_line is None:
+            raise ValueError("Expected '[Counterexample]' marker but none was found")
 
+        i = state_begin_line
         # grab state information
-        for i, line in enumerate(lines[state_begin_line:]):
-
-            # print()
-            # print("current line", line)
-            # print()
-
+        # for i, line in enumerate(lines[state_begin_line:]):
+        while i < len(lines):
+            line = lines[i]
             # get the first character on the line
             first_character = line[0] if line else ""
 
             if first_character == "S":
                 state = self.parse_state_line(line)
-                # file_name = state["file"]
-                # if result.get("file") == state["file"]: # report only states from the submitted file
+
                 entry["state_number"] = state["state_number"]
                 entry["line"] = state["line"]
                 entry["function"] = state["function"]
-            elif first_character == "-":  # demarcator line, skip it
-                continue
-            elif first_character == "":  # empty line that separates states, skip it
-                continue
-            elif first_character == "V":  # violated property section, exit loop
-                entry["assignment"] = None
-                result["states"].append(entry)
-                break
-            else:
-                # if file_name == result["file"]:
-                assignment = line.strip()
-                if " (" in assignment:
-                    assignment = assignment[:assignment.index(" (")]
-                entry["assignment"] = assignment
+                # i += 1
+            elif first_character == "-":  # demarcator line
+                # continue
+                # next line is the beginning of assignment lines
+                i += 1
+
+                first_character = lines[i][0] if lines[i] else ""
+
+                if first_character == "V":  # violated property section, exit loop
+                    entry["assignment"] = None
+                    result["states"].append(entry)
+                    break  # exit the loop
+                else:
+                    assignment_lines = [lines[i].strip()]
+
+                    i += 1
+                    while i < len(lines) and lines[i].strip() != "":
+                        assignment_lines.append(lines[i].strip())
+                        i += 1
+
+                    assignment = "\n".join(assignment_lines)
+
+                    if "{" in assignment:
+                        pass
+                    elif "(" in assignment:
+                        # ignore everything after first parenthesis
+                        assignment = assignment[:assignment.index(" (")]
+
+                    entry["assignment"] = assignment
+
                 result["states"].append(entry)
                 entry = {}
+
+            i += 1
+
         return result
 
     def extract_result(self, target: str, lines: list[str]) -> set[str]:
