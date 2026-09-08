@@ -100,3 +100,20 @@ async def upload_submission(
         raise HTTPException(status_code=500, detail=f"Upload failed: {exc}") from exc
 
     return UploadResponse(submission_id=submission_id, files=saved_files)
+
+@router.delete("/submissions/{submission_id}")
+async def delete_submission(submission_id: str):
+    submission_dir = SUBMISSIONS_ROOT / submission_id
+
+    if submission_dir.resolve().parent != SUBMISSIONS_ROOT:
+        raise HTTPException(status_code=400, detail="Invalid submission id.")
+
+    if not submission_dir.is_dir():
+        raise HTTPException(status_code=404, detail=f"Submission '{submission_id}' not found.")
+
+    try:
+        shutil.rmtree(submission_dir)
+    except OSError as exc:
+        raise HTTPException(status_code=500, detail=f"Could not delete submission: {exc}")
+
+    return {"submission_id": submission_id, "deleted": True}

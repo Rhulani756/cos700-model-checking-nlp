@@ -5,6 +5,11 @@ class FeedbackRequest(BaseModel):
     submission_id: str
     compilation_mode: Literal["independent", "combined"] = "independent"
 
+class FileStatus(BaseModel):
+    file: str
+    verification_status: str  # "FAILED" | "SUCCESSFUL" | "UNKNOWN" | "ERROR"
+    has_feedback_error: bool = False
+
 class FeedbackResponse(BaseModel):
     file: str
     verification_status: str
@@ -14,4 +19,4 @@ class FeedbackResponse(BaseModel):
     diagram_svg: str = ""
     diagram_render_error: str = ""
     raw_output: str
-    other_files: List[str] = []           # names of any other files in the submission, unprocessed for feedback
+    other_files: List[FileStatus] = []     
