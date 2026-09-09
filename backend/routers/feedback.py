@@ -50,6 +50,9 @@ def _flatten_result(pipeline_result: Dict[str, Any]) -> FeedbackResponse:
         diagram_render_error=diagram.get("render_error", ""),
         raw_output=chosen["raw_output"],
         other_files=other_files,
+        passed_properties=chosen.get("passed_properties", []),
+        failed_properties=chosen.get("failed_properties", []),
+        undetermined_properties=chosen.get("undetermined_properties", []),
     )
 
 

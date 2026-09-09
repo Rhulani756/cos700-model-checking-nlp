@@ -185,6 +185,31 @@ export default function Feedback({
                     </div>
                   )}
 
+                  {!passed && showText && (result.passed_properties?.length > 0 || result.failed_properties?.length > 0 || result.undetermined_properties?.length > 0) && (
+                    <FeedbackSection title="Properties Checked">
+                      <ul className="space-y-1">
+                        {result.failed_properties?.map((prop) => (
+                          <li key={prop} className="flex items-center gap-1.5 text-sm">
+                            <X className="w-3.5 h-3.5" style={{ color: COLORS.red }} />
+                            <span style={{ color: COLORS.black }}>{prop}</span>
+                          </li>
+                        ))}
+                        {result.passed_properties?.map((prop) => (
+                          <li key={prop} className="flex items-center gap-1.5 text-sm">
+                            <CheckCircle className="w-3.5 h-3.5" style={{ color: COLORS.blue }} />
+                            <span style={{ color: COLORS.black }}>{prop}</span>
+                          </li>
+                        ))}
+                        {result.undetermined_properties?.map((prop) => (
+                          <li key={prop} className="flex items-center gap-1.5 text-sm">
+                            <span style={{ color: COLORS.gold }}>?</span>
+                            <span style={{ color: COLORS.black + "99" }}>{prop} (undetermined)</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </FeedbackSection>
+                  )}
+
                   {passed && showText && (
                     <>
                       <p className="text-sm" style={{ color: COLORS.black }}>

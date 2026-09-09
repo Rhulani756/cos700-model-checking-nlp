@@ -1,13 +1,11 @@
-# Entry point for the end-to-end pipeline
-# Student Input → Model Checker → Parser → NLP Module → Feedback Output
-
+# pipeline/main.py
 import asyncio
 import logging
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Union
 
 from pipeline.model_checker.esbmc_runner import ESBMCRunner
-from pipeline.parser.counterexample_parser import parse
+from pipeline.parser.counterexample_parser import ESBMCParser
 from pipeline.snippet import extract_snippet
 from pipeline.nlp.llm_client import LLMClient
 
@@ -15,6 +13,7 @@ from pipeline.nlp.llm_client import LLMClient
 logger = logging.getLogger(__name__)
 
 runner = ESBMCRunner()
+parser = ESBMCParser()
 
 OnStage = Callable[[str, str], None]
 
@@ -29,16 +28,10 @@ async def run_pipeline(
     mode: str = "single",
     on_stage: Optional[OnStage] = None,
 ) -> Dict[str, Any]:
-    """
-    Run the complete pipeline for an uploaded submission directory.
-    ... (docstring unchanged) ...
-    """
-
     submission_dir = Path(submission_path).resolve()
 
     if not submission_dir.exists():
         raise FileNotFoundError("Submission path not found: %s" % submission_dir)
-
     if not submission_dir.is_dir():
         raise ValueError("Expected a submission directory, received: %s" % submission_dir)
 
@@ -66,25 +59,26 @@ async def _run_single_file(
     source_file: Path,
     on_stage: Optional[OnStage] = None,
 ) -> Dict[str, Any]:
-    """Run the complete pipeline for one uploaded C++ source file."""
-
     logger.debug("Running model checker on: %s", source_file)
     _emit(on_stage, "running_model_checker", source_file.name)
 
-    raw_output = await asyncio.to_thread(runner.run, source_file)
+    raw_output, raw_multi_output = await asyncio.to_thread(runner.run, source_file)
     _raise_if_checker_error(raw_output, source_file)
 
-    logger.debug("Raw model checker output for %s:\n%s", source_file.name, raw_output)
+    logger.debug("Raw singular-trace output for %s:\n%s", source_file.name, raw_output)
+    logger.debug("Raw multi-property output for %s:\n%s", source_file.name, raw_multi_output)
 
     _emit(on_stage, "parsing_output", source_file.name)
-    parsed_output = parse(raw_output)
+    singular, multi = parser.parse(raw_output, raw_multi_output)
 
-    logger.debug("Parsed output for %s:\n%s", source_file.name, parsed_output)
+    logger.debug("Parsed singular output for %s:\n%s", source_file.name, singular)
+    logger.debug("Parsed multi output for %s:\n%s", source_file.name, multi)
 
     return await _build_result(
         source_file=source_file,
         raw_output=raw_output,
-        parsed_output=parsed_output,
+        singular=singular,
+        multi=multi,
         on_stage=on_stage,
     )
 
@@ -93,34 +87,35 @@ async def _run_combined(
     source_files: List[Path],
     on_stage: Optional[OnStage] = None,
 ) -> List[Dict[str, Any]]:
-    """Run ESBMC once using all uploaded C++ files together."""
-
     logger.debug("Running model checker on combined submission: %s", source_files)
     _emit(on_stage, "running_model_checker", "combined submission")
 
-    raw_output = await asyncio.to_thread(runner.run, source_files)
+    raw_output, raw_multi_output = await asyncio.to_thread(runner.run, source_files)
     _raise_if_checker_error(raw_output, source_files[0])
 
-    logger.debug("Raw combined model checker output:\n%s", raw_output)
+    logger.debug("Raw combined singular output:\n%s", raw_output)
+    logger.debug("Raw combined multi output:\n%s", raw_multi_output)
 
     _emit(on_stage, "parsing_output", "combined submission")
-    parsed_output = parse(raw_output)
+    singular, multi = parser.parse(raw_output, raw_multi_output)
 
-    logger.debug("Parsed combined output:\n%s", parsed_output)
+    logger.debug("Parsed combined singular output:\n%s", singular)
+    logger.debug("Parsed combined multi output:\n%s", multi)
 
-    verification_result = parsed_output.get("verification_result")
+    verification_result = singular.get("verification_result")
     if not verification_result:
         raise ValueError("Parser did not return a verification_result for the combined submission.")
 
     if verification_result == "FAILED":
-        source_file = _find_counterexample_file(parsed_output, source_files)
+        source_file = _find_counterexample_file(singular, source_files)
     else:
         source_file = source_files[0]
 
     result = await _build_result(
         source_file=source_file,
         raw_output=raw_output,
-        parsed_output=parsed_output,
+        singular=singular,
+        multi=multi,
         on_stage=on_stage,
     )
 
@@ -130,16 +125,15 @@ async def _run_combined(
 async def _build_result(
     source_file: Path,
     raw_output: str,
-    parsed_output: Dict[str, Any],
+    singular: Dict[str, Any],
+    multi: Dict[str, Any],
     on_stage: Optional[OnStage] = None,
 ) -> Dict[str, Any]:
-    """Convert parser output into the structure expected by the backend."""
-
-    verification_result = parsed_output.get("verification_result")
+    verification_result = singular.get("verification_result")
     if not verification_result:
         raise ValueError(
             "Parser did not return verification_result for file '%s'. Parsed output: %r"
-            % (source_file.name, parsed_output)
+            % (source_file.name, singular)
         )
 
     entry: Dict[str, Any] = {
@@ -149,13 +143,16 @@ async def _build_result(
         "counterexample": None,
         "feedback": None,
         "diagram": {"plantuml": "", "svg": "", "render_error": ""},
+        "passed_properties": multi.get("passed", []),
+        "failed_properties": multi.get("failed", []),
+        "undetermined_properties": multi.get("undetermined", []),
     }
 
     if verification_result != "FAILED":
         logger.info("No violation detected in %s; skipping feedback generation.", source_file.name)
         return entry
 
-    counterexample = dict(parsed_output)
+    counterexample = dict(singular)
     failing_line = counterexample.get("line")
 
     if failing_line:
@@ -197,107 +194,36 @@ async def _build_result(
     return entry
 
 
-def _find_source_files(
-    submission_dir: Path,
-) -> List[Path]:
-    """Find C++ source files in an uploaded submission."""
-
-    supported_extensions = {
-        ".cpp",
-        ".cc",
-        ".cxx",
-        ".c++",
-    }
-
+def _find_source_files(submission_dir: Path) -> List[Path]:
+    supported_extensions = {".cpp", ".cc", ".cxx", ".c++"}
     files = [
-        path
-        for path in submission_dir.rglob("*")
-        if (
-            path.is_file()
-            and path.suffix.lower()
-            in supported_extensions
-        )
+        path for path in submission_dir.rglob("*")
+        if path.is_file() and path.suffix.lower() in supported_extensions
     ]
-
-    return sorted(
-        files,
-        key=lambda path: str(path).lower(),
-    )
+    return sorted(files, key=lambda path: str(path).lower())
 
 
-def _find_counterexample_file(
-    parsed_output: Dict[str, Any],
-    source_files: List[Path],
-) -> Path:
-    """Match the parser's violated file back to an uploaded source file."""
-
-    parser_file = str(
-        parsed_output.get(
-            "file",
-            "",
-        )
-        or ""
-    )
-
+def _find_counterexample_file(singular: Dict[str, Any], source_files: List[Path]) -> Path:
+    parser_file = str(singular.get("file", "") or "")
     if parser_file:
-        parser_name = Path(
-            parser_file.replace("\\", "/")
-        ).name.lower()
-
+        parser_name = Path(parser_file.replace("\\", "/")).name.lower()
         for source_file in source_files:
-            if (
-                source_file.name.lower()
-                == parser_name
-            ):
+            if source_file.name.lower() == parser_name:
                 return source_file
-
-    # If the parser cannot identify the specific file,
-    # use the first uploaded source as a safe fallback.
     return source_files[0]
 
 
-def _is_combined_mode(
-    mode: str,
-) -> bool:
-    """Determine whether the backend requested combined compilation."""
-
-    normalized = (
-        str(mode or "")
-        .strip()
-        .lower()
-        .replace("-", "_")
-        .replace(" ", "_")
-    )
-
+def _is_combined_mode(mode: str) -> bool:
+    normalized = str(mode or "").strip().lower().replace("-", "_").replace(" ", "_")
     return normalized in {
-        "combined",
-        "combine",
-        "project",
-        "whole_project",
-        "multi_file",
-        "multifile",
-        "together",
-        "all",
+        "combined", "combine", "project", "whole_project",
+        "multi_file", "multifile", "together", "all",
     }
 
 
-def _raise_if_checker_error(
-    raw_output: str,
-    source_file: Path,
-) -> None:
-    """Prevent model-checker execution errors from being treated as passes."""
-
-    stripped = (
-        raw_output or ""
-    ).strip()
-
+def _raise_if_checker_error(raw_output: str, source_file: Path) -> None:
+    stripped = (raw_output or "").strip()
     if not stripped:
-        raise RuntimeError(
-            "ESBMC returned no output for %s."
-            % source_file.name
-        )
-
+        raise RuntimeError("ESBMC returned no output for %s." % source_file.name)
     if stripped.startswith("Error:"):
-        raise RuntimeError(
-            stripped
-        )
+        raise RuntimeError(stripped)
