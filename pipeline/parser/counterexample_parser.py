@@ -98,7 +98,14 @@ class ESBMCParser:
 
                 # line 3 — violation type
                 i += 1
-                result["violation_type"] = lines[i].strip()
+                violation_type = lines[i].strip()
+
+                result["violation_type"] = violation_type
+
+                # "array bounds violated", "dereference failure: NULL pointer", "unwinding assertion", "division by zero"
+                if not any(prop in violation_type for prop in self.PROPERTIES):
+                    result["verification_result"] = "UNSUPPORTED"
+                    return result
 
                 # default violation description to None
                 result["violation_description"] = None
