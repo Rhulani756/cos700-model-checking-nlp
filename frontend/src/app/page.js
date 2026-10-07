@@ -8,6 +8,7 @@ import UploadInfo from "./components/uploadInfo"
 import { COLORS } from "./components/colors"
 import Link from "next/link"
 import { Group, Panel, Separator } from "react-resizable-panels";
+import { Settings as SettingsIcon } from "lucide-react";
 
 const PANEL = { NONE: "none", STAGING: "staging", RESULTS: "results" };
 
@@ -23,6 +24,33 @@ export default function Home() {
   const fileInputRef = useRef(null);
   const folderInputRef = useRef(null);
   const [submissionId, setSubmissionId] = useState(null);
+
+  const [esbmcInstalled, setEsbmcInstalled] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/health/esbmc")
+      .then((res) => res.json())
+      .then((data) => setEsbmcInstalled(data.installed))
+      .catch(() => setEsbmcInstalled(false));
+  }, []);
+
+  const [geminiApiKey, setGeminiApiKey] = useState(null);
+  const [apiKeyChecked, setApiKeyChecked] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { Store } = await import("@tauri-apps/plugin-store");
+        const store = await Store.load("settings.json");
+        const key = await store.get("gemini_api_key");
+        setGeminiApiKey(key || null);
+      } catch {
+        setGeminiApiKey(null);
+      } finally {
+        setApiKeyChecked(true);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     if (!error) return;
@@ -96,9 +124,12 @@ export default function Home() {
     applyStageWithMinDelay(STAGE_LABELS.discovering_files);
 
     try {
+      const headers = { "Content-Type": "application/json" };
+      if (geminiApiKey) headers["X-Gemini-Api-Key"] = geminiApiKey;
+
       const res = await fetch("http://localhost:8000/api/feedback/stream", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify({
           submission_id: submissionIdToUse,
           compilation_mode: compilationMode,
@@ -212,6 +243,28 @@ export default function Home() {
   return (
     <div className="flex-1 min-h-0 flex flex-col bg-white font-sans">
 
+      {apiKeyChecked && geminiApiKey === null && (
+        <div className="fixed top-6 right-6 z-50 p-4 rounded-xl border" style={{ borderColor: COLORS.gold, backgroundColor: COLORS.goldLight }}>
+          <p className="text-sm" style={{ color: COLORS.black }}>
+            No Gemini API key configured.{" "}
+            <Link href="/settings" className="underline font-medium">Add one in Settings</Link>.
+          </p>
+        </div>
+      )}
+
+      {esbmcInstalled === false && (
+        <div className="fixed top-6 right-6 z-50 p-4 rounded-xl border" style={{ borderColor: COLORS.red, backgroundColor: COLORS.goldLight }}>
+          <p className="text-sm font-semibold" style={{ color: COLORS.red }}>ESBMC not found</p>
+          <p className="text-xs mt-1" style={{ color: COLORS.black }}>
+            Install ESBMC from{" "}
+            <a href="https://github.com/esbmc/esbmc/releases" target="_blank" rel="noopener noreferrer" className="underline">
+              github.com/esbmc/esbmc/releases
+            </a>{" "}
+            and restart the app.
+          </p>
+        </div>
+      )}
+
       <header className="border-b-4" style={{ backgroundColor: COLORS.black, borderColor: COLORS.gold }}>
         <div className="px-12 py-8">
           <div className="flex items-center justify-between">
@@ -223,6 +276,14 @@ export default function Home() {
                 Research Prototype
               </p>
             </div>
+            <Link
+              href="/settings"
+              aria-label="Settings"
+              className="p-2 rounded-lg hover:opacity-80"
+              style={{ color: COLORS.gold }}
+            >
+              <SettingsIcon className="w-6 h-6" />
+            </Link>
           </div>
         </div>
       </header>
@@ -308,16 +369,16 @@ export default function Home() {
         <div className="py-7">
           <ul className="flex flex-row justify-center gap-6 list-none">
             <li>
-              <Link href="/research" className="text-white hover:opacity-80" style={{ color: COLORS.white }}>
-                Research Information
+              <Link href="/about-us" className="text-white hover:text-blue-500">
+                About Research and Team
               </Link>
             </li>
 
-            <li>
+            {/* <li>
               <Link href="/about-us" className="text-white hover:opacity-80" style={{ color: COLORS.white }}>
                 Team & Organisation
               </Link>
-            </li>
+            </li> */}
           </ul>
 
         </div>

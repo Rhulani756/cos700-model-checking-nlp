@@ -6,7 +6,8 @@ from pydantic import BaseModel
 
 router = APIRouter()
 
-SUBMISSIONS_ROOT = (Path(__file__).resolve().parent / ".." / ".." / "data" / "student_submissions").resolve()
+from backend.paths import SUBMISSIONS_ROOT
+# SUBMISSIONS_ROOT = (Path(__file__).resolve().parent / ".." / ".." / "data" / "student_submissions").resolve()
 
 ALLOWED_EXTENSIONS = {".cpp", ".h"}
 MAX_FILE_READ_SIZE = 3 * 1024 * 1024  # 2 MB — plenty for a source file, guards against surprises

@@ -1,3 +1,4 @@
+#llm_client.py
 from __future__ import annotations
 
 import asyncio
@@ -59,7 +60,7 @@ class LLMClient:
         self.include_diagram = include_diagram
 
     @classmethod
-    def from_env(cls) -> "LLMClient":
+    def from_env(cls, api_key_override: str | None = None) -> "LLMClient":
         provider_name = os.getenv("LLM_PROVIDER", "gemini").strip().lower()
         model = os.getenv("LLM_MODEL", DEFAULT_MODELS.get(provider_name, "")).strip()
         if not model:
@@ -69,35 +70,28 @@ class LLMClient:
         max_retries = int(os.getenv("LLM_MAX_RETRIES", "2"))
 
         if provider_name == "anthropic":
+            api_key = api_key_override or os.getenv("ANTHROPIC_API_KEY", "")
             provider: LLMProvider = AnthropicProvider(
-                api_key=os.getenv("ANTHROPIC_API_KEY", ""),
-                model=model,
-                timeout_seconds=timeout_seconds,
-                max_retries=max_retries,
+                api_key=api_key, model=model, timeout_seconds=timeout_seconds, max_retries=max_retries,
             )
         elif provider_name == "gemini":
+            api_key = api_key_override or os.getenv("GEMINI_API_KEY", "")
             provider = GeminiProvider(
-                api_key=os.getenv("GEMINI_API_KEY", ""),
-                model=model,
-                timeout_seconds=timeout_seconds,
-                max_retries=max_retries,
+                api_key=api_key, model=model, timeout_seconds=timeout_seconds, max_retries=max_retries,
             )
         else:
-            raise ConfigurationError(
-                "LLM_PROVIDER must be either 'anthropic' or 'gemini'"
-            )
+            raise ConfigurationError("LLM_PROVIDER must be either 'anthropic' or 'gemini'")
 
         return cls(
             provider=provider,
             max_tokens=int(os.getenv("LLM_MAX_OUTPUT_TOKENS", "1400")),
             temperature=float(os.getenv("LLM_TEMPERATURE", "0.2")),
             validation_attempts=int(os.getenv("LLM_VALIDATION_ATTEMPTS", "2")),
-            fallback_on_error=os.getenv("LLM_FALLBACK_ON_ERROR", "true").lower()
-            in {"1", "true", "yes"},
-            include_diagram=os.getenv("LLM_INCLUDE_DIAGRAM", "true").lower()
-            in {"1", "true", "yes"},
+            fallback_on_error=os.getenv("LLM_FALLBACK_ON_ERROR", "true").lower() in {"1", "true", "yes"},
+            include_diagram=os.getenv("LLM_INCLUDE_DIAGRAM", "true").lower() in {"1", "true", "yes"},
         )
 
+    
     async def generate_feedback(
         self, parser_output: Counterexample | Dict[str, Any]
     ) -> FeedbackGenerationResult:

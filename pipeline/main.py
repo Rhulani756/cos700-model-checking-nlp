@@ -27,6 +27,7 @@ async def run_pipeline(
     submission_path: Union[str, Path],
     mode: str = "single",
     on_stage: Optional[OnStage] = None,
+    gemini_api_key: Optional[str] = None,
 ) -> Dict[str, Any]:
     submission_dir = Path(submission_path).resolve()
 
@@ -44,11 +45,15 @@ async def run_pipeline(
     logger.info("Running pipeline for %d source file(s). Mode: %s", len(source_files), mode)
 
     if _is_combined_mode(mode):
-        results = await _run_combined(source_files, on_stage=on_stage)
+        results = await _run_combined(
+            source_files, on_stage=on_stage, gemini_api_key=gemini_api_key
+        )
     else:
         results = []
         for source_file in source_files:
-            result = await _run_single_file(source_file, on_stage=on_stage)
+            result = await _run_single_file(
+                source_file, on_stage=on_stage, gemini_api_key=gemini_api_key
+            )
             results.append(result)
 
     _emit(on_stage, "done")
@@ -58,6 +63,7 @@ async def run_pipeline(
 async def _run_single_file(
     source_file: Path,
     on_stage: Optional[OnStage] = None,
+    gemini_api_key: Optional[str] = None,
 ) -> Dict[str, Any]:
     logger.debug("Running model checker on: %s", source_file)
     _emit(on_stage, "running_model_checker", source_file.name)
@@ -80,12 +86,14 @@ async def _run_single_file(
         singular=singular,
         multi=multi,
         on_stage=on_stage,
+        gemini_api_key=gemini_api_key,
     )
 
 
 async def _run_combined(
     source_files: List[Path],
     on_stage: Optional[OnStage] = None,
+    gemini_api_key: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
     logger.debug("Running model checker on combined submission: %s", source_files)
     _emit(on_stage, "running_model_checker", "combined submission")
@@ -117,6 +125,7 @@ async def _run_combined(
         singular=singular,
         multi=multi,
         on_stage=on_stage,
+        gemini_api_key=gemini_api_key,
     )
 
     return [result]
@@ -128,6 +137,7 @@ async def _build_result(
     singular: Dict[str, Any],
     multi: Dict[str, Any],
     on_stage: Optional[OnStage] = None,
+    gemini_api_key: Optional[str] = None,
 ) -> Dict[str, Any]:
     verification_result = singular.get("verification_result")
     if not verification_result:
@@ -172,7 +182,7 @@ async def _build_result(
     try:
         _emit(on_stage, "generating_feedback", source_file.name)
 
-        client = LLMClient.from_env()
+        client = LLMClient.from_env(api_key_override=gemini_api_key)
         generation_result = await client.generate_feedback(counterexample)
 
         entry["feedback"] = generation_result.feedback.model_dump()

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 import json
 from pathlib import Path
 from typing import Any, Dict, List
@@ -13,6 +14,13 @@ PROMPT_VERSION = "1.2.0"
 DEFAULT_MAX_SOURCE_CHARS = 6000
 DEFAULT_MAX_TRACE_STEPS = 24
 DEFAULT_MAX_VALUE_CHARS = 300
+
+def _default_prompts_directory() -> Path:
+    if getattr(sys, "frozen", False):
+        # PyInstaller
+        base_path = Path(sys._MEIPASS)
+        return base_path / "pipeline" / "nlp" / "prompts"
+    return Path(__file__).parent / "prompts"
 
 SYSTEM_PROMPT = """You are a careful programming tutor who explains formal-verification counterexamples to novice C++ students.
 
@@ -38,7 +46,7 @@ class PromptBuilder:
         max_trace_steps: int = DEFAULT_MAX_TRACE_STEPS,
         max_value_chars: int = DEFAULT_MAX_VALUE_CHARS,
     ) -> None:
-        self.prompts_directory = prompts_directory or Path(__file__).parent / "prompts"
+        self.prompts_directory = prompts_directory or _default_prompts_directory()
         self.max_source_chars = max_source_chars
         self.max_trace_steps = max_trace_steps
         self.max_value_chars = max_value_chars
@@ -148,3 +156,4 @@ Output requirements:
             return value
         omitted = len(value) - limit
         return value[:limit] + "\n...[truncated %d characters]" % omitted
+

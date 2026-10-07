@@ -12,8 +12,9 @@ ALLOWED_EXTENSIONS = {".cpp", ".h"}
 MAX_FILE_SIZE = 5 * 1024 * 1024      # 5 MB per file
 MAX_TOTAL_SIZE = 50 * 1024 * 1024    # 50 MB per submission
 
-SUBMISSIONS_ROOT = (Path(__file__).resolve().parent / ".." / ".." / "data" / "student_submissions").resolve()
-SUBMISSIONS_ROOT.mkdir(parents=True, exist_ok=True)
+from backend.paths import SUBMISSIONS_ROOT
+# SUBMISSIONS_ROOT = (Path(__file__).resolve().parent / ".." / ".." / "data" / "student_submissions").resolve()
+# SUBMISSIONS_ROOT.mkdir(parents=True, exist_ok=True)
 
 
 class UploadResponse(BaseModel):

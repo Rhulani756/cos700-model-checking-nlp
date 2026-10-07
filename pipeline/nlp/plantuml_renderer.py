@@ -22,10 +22,7 @@ import httpx
 from .exceptions import DiagramRenderError
 
 
-DEFAULT_SERVER_URL = os.getenv(
-    "PLANTUML_SERVER_URL",
-    "http://localhost:8081",
-)
+DEFAULT_SERVER_URL = "https://www.plantuml.com/plantuml"
 
 DEFAULT_TIMEOUT_SECONDS = 10.0
 _MAX_ERROR_BODY_CHARS = 1000
