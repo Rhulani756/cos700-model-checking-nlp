@@ -288,7 +288,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 flex items-center justify-center max-w-7xl mx-auto px-6 py-12 w-full">
+      <main className="flex-1 flex items-center justify-center w-full max-w-none min-w-0 min-h-0 px-8 py-6">
         <div className={`grid gap-8 w-full transition-all duration-500 ${gridColsClass}`}>
           {!previewOpen && (
             <UploadBox
@@ -325,9 +325,9 @@ export default function Home() {
           )}
 
           {panelMode === PANEL.RESULTS && previewOpen && (
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 w-full h-full min-h-0 min-w-0 overflow-hidden">
               <Group orientation="horizontal">
-                <Panel defaultSize="50%" minSize="30%" maxSize="70%">
+                <Panel defaultSize="50%" minSize="30%" maxSize="70%" className="min-h-0 min-w-0 overflow-hidden">
                   <Feedback
                     loading={loading}
                     assignments={Assignments}
@@ -351,7 +351,7 @@ export default function Home() {
                   />
                 </Separator>
 
-                <Panel defaultSize="50%" minSize="30%" maxSize="70%">
+                <Panel defaultSize="50%" minSize="30%" maxSize="70%" className="min-h-0 min-w-0 overflow-hidden">
                   <CodePreview
                     submissionId={submissionId}
                     initialFile={previewFile}

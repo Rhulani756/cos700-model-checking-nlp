@@ -9,7 +9,7 @@
   "app": {
     "windows": [
       {
-        "title": "Model Checking & NLP Feedback",
+        "title": "GroundedFeedback: Model Checking & NLP Feedback",
         "width": 1280,
         "height": 800
       }
