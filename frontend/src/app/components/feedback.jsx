@@ -128,7 +128,6 @@ export default function Feedback({
 
                 return (
                   <div key={idx} className="space-y-6">
-                    {/* Header — always shown regardless of filter */}
                     <div
                       className="flex items-center gap-3 p-4 rounded-xl border"
                       style={{
@@ -162,7 +161,6 @@ export default function Feedback({
                       </button>
                     </div>
 
-                    {/* Other-files summary — always shown regardless of filter */}
                     {result.other_files && result.other_files.length > 0 && (
                       <div className="text-xs space-y-1" style={{ color: COLORS.black }}>
                         <p>
