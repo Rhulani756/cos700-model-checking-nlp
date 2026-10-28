@@ -94,8 +94,8 @@ npm run tauri build
 
 ```
 desktop/src-tauri/target/release/bundle/
-├── deb/        desktop_0.1.0_amd64.deb
-└── appimage/   desktop_0.1.0_amd64.AppImage
+├── deb/        <package name>.deb
+└── appimage/   <package name>.AppImage
 ```
 
 ## 4. Installing and running the package
