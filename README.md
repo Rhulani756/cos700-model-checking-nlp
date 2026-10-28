@@ -28,11 +28,11 @@ Each piece of feedback gives:
 
 | Element | Purpose |
 |---|---|
-| 🔎 **What** went wrong | the violated property and where |
-| 🧠 **Why** it went wrong | the root cause, in plain language |
-| 🛠 **What** to change | concrete, non-complete guidance |
-| ❓ **A question** | prompts the student to reason about the fix |
-| 🗺 **A diagram** | the execution path leading to the error |
+| **What** went wrong | the violated property and where |
+| **Why** it went wrong | the root cause, in plain language |
+| **What** to change | concrete, non-complete guidance |
+| **A question** | prompts the student to reason about the fix |
+| **A diagram** | the execution path leading to the error |
 
 **Properties checked:** array bounds · null-pointer dereference · division by zero · loop termination (unwinding assertion, bound 50)
 
@@ -119,8 +119,8 @@ Within-subject survey · **13 participants** · **8 programs** · seven 5-point 
 
 <sub>*Not stated in the report; derived as 100 − 80.3 − 14.3 (agree) from Figure 4. Neutral/negative = 18.7 + 33.0 + 28.6.</sub>
 
-- 🥇 **11 of 13** chose text + diagram as most helpful.
-- 🥉 **12 of 13** named raw ESBMC output least helpful.
+- **11 of 13** chose text + diagram as most helpful.
+- **12 of 13** named raw ESBMC output least helpful.
 - Diagram-only was weakest on *"clear ideas on how to proceed"*.
 
 > These are perceived-usefulness results from a small study. They do not measure learning gains or feedback accuracy.
