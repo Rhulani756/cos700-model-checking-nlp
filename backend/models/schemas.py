@@ -1,17 +1,25 @@
+from typing import List, Optional, Literal
 from pydantic import BaseModel
-from typing import Literal
 
 class FeedbackRequest(BaseModel):
-    source_code: str
-    filename: str
-    tool: Literal["cbmc", "esbmc"] = "cbmc"
-    feedback_type: Literal["KC", "KM", "KH", "KMC"] = "KM"
-    output_category: Literal["natural_language", "visual"] = "natural_language"
-    prompt_type: Literal["zero_shot", "one_shot"] = "one_shot"
+    submission_id: str
+    compilation_mode: Literal["independent", "combined"] = "independent"
+
+class FileStatus(BaseModel):
+    file: str
+    verification_status: str  # "FAILED" | "SUCCESSFUL" | "UNKNOWN" | "ERROR"
+    has_feedback_error: bool = False
 
 class FeedbackResponse(BaseModel):
+    file: str
     verification_status: str
-    error_type: str | None
-    line: int | None
-    feedback: str
+    error_type: Optional[str] = None
+    line: Optional[int] = None
+    feedback: Optional[dict] = None
+    diagram_svg: str = ""
+    diagram_render_error: str = ""
     raw_output: str
+    other_files: List[FileStatus] = []
+    passed_properties: List[str] = []
+    failed_properties: List[str] = []
+    undetermined_properties: List[str] = []

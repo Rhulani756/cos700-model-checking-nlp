@@ -1,0 +1,5 @@
+{
+    "terminal.integrated.agentHostProfile.linux": "",
+    "python.terminal.useEnvFile": true,
+    "python.envFile": "${cos700-model-checking-nlp}/.env"
+}

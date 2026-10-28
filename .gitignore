@@ -225,3 +225,12 @@ frontend/.env.local
 # Python
 backend/__pycache__/
 backend/.venv/
+
+.env
+backend/.env
+frontend/.env.local
+
+
+
+#tester
+output.txt
